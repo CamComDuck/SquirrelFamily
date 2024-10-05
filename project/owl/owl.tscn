@@ -6,7 +6,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ri4g2"]
 size = Vector2(100, 101)
 
-[node name="Owl" type="CharacterBody2D"]
+[node name="Owl" type="RigidBody2D"]
+gravity_scale = 0.0
+lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 1000
 script = ExtResource("1_ldg1v")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -19,4 +23,5 @@ shape = SubResource("RectangleShape2D_ri4g2")
 [node name="HuntTimer" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="HuntTimer" to="." method="_on_hunt_timer_timeout"]

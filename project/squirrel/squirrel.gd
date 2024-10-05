@@ -35,11 +35,11 @@ func _physics_process(delta: float) -> void:
 
 		move_and_slide()
 		for i in get_slide_collision_count():
-			print("Colliding With: " + str(get_slide_collision(i).get_collider().name))
-			if get_slide_collision(i).get_collider().name == "Owl":
-				game_lost.emit()
-				_can_move = false
-			elif get_slide_collision(i).get_collider().name == "HidingSpot":
+			#print("Colliding With: " + str(get_slide_collision(i).get_collider().name))
+			#if get_slide_collision(i).get_collider().name == "Owl":
+				#game_lost.emit()
+				#_can_move = false
+			if get_slide_collision(i).get_collider().name == "HidingSpot":
 				_hiding_spot_position = get_slide_collision(i).get_position()
 			else:
 				_hiding_spot_position = Vector2.ZERO

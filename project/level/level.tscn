@@ -29,6 +29,17 @@ texture = ExtResource("2_3udfn")
 position = Vector2(-0.160336, -0.5)
 shape = SubResource("RectangleShape2D_0xrhw")
 
+[node name="Ceiling" type="StaticBody2D" parent="."]
+position = Vector2(642.405, -50)
+scale = Vector2(15, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ceiling"]
+texture = ExtResource("2_3udfn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+position = Vector2(-0.160336, -0.5)
+shape = SubResource("RectangleShape2D_0xrhw")
+
 [node name="Owl" parent="." instance=ExtResource("3_hqqth")]
 position = Vector2(884, 60)
 

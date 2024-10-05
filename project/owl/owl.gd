@@ -1,16 +1,16 @@
 class_name Owl
-extends CharacterBody2D
+extends RigidBody2D
 
 var _moving_left : bool
 var _max_x := 1230
 var _min_x := 50
-var _max_y := 610
-var _min_y := 60
-var _move_speed := 150
+var _max_y := 100
+var _min_y := -100
+var _move_speed := 2500
 var _is_hunting := false
 var _is_diving := false
 var _dive_x : float
-var _can_move : bool = false
+var _can_move : bool = true
 
 @onready var _hunt_timer_object : Timer = $HuntTimer
 
@@ -26,8 +26,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if _can_move:
+		print ("Hunting: " + str(_is_hunting) + " | Diving: " + str(_is_diving))
 		if not _is_hunting and not _is_diving:
-			_movement_wait(delta)
+			_movement(delta, 0)
 			var hunt_chance : float = randf_range(0, 100)
 			if hunt_chance < 2: # Starts hunt
 				_is_hunting = true
@@ -39,36 +40,26 @@ func _physics_process(delta: float) -> void:
 				_dive_x = randf_range(_min_x, _max_x)
 				
 		elif _is_hunting and _is_diving:
-			_movement_dive(delta, _max_y)
+			_movement(delta, _max_y)
 			
 		elif _is_hunting and not _is_diving:
-			_movement_wait(delta)
+			_movement(delta, 0)
 			
 		elif not _is_hunting and _is_diving:
-			_movement_dive(delta, _min_y)
+			_movement(delta, _min_y)
 
 
-func _movement_dive(delta : float, y_dir : int) -> void:
-	if position.y == y_dir:
-		_is_diving = false
-	else:
-		_is_diving = true
-		position.y = move_toward(position.y, y_dir, delta * _move_speed)
-		position.x = move_toward(position.x, _dive_x, delta * _move_speed)
-	
-	
-func _movement_wait(delta : float) -> void:
+func _movement(delta : float, y_dir : int) -> void:
 	var motion : Vector2
 	if position.x < _max_x and not _moving_left:
-		motion = Vector2(_move_speed * delta, 0)
+		linear_velocity = Vector2(_move_speed * delta, y_dir)
 	elif position.x >= _max_x and not _moving_left:
 		_moving_left = true
 	elif position.x >= _min_x and _moving_left:
-		motion = Vector2(-1 * _move_speed * delta, 0)
+		linear_velocity = Vector2(-1 * _move_speed * delta, y_dir)
 	elif position.x <= _min_x and _moving_left:
 		_moving_left = false
-		
-	move_and_collide(motion)
+
 
 func _on_hunt_timer_timeout() -> void:
 	_is_hunting = false
@@ -77,3 +68,11 @@ func _on_hunt_timer_timeout() -> void:
 
 func _on_squirrel_game_lost() -> void:
 	_can_move = false
+
+
+func _on_body_entered(body: Node) -> void:
+	print (body.name)
+	_is_diving = false
+	
+	if body.name != "Floor" and body.name != "Ceiling":
+		_moving_left = not _moving_left

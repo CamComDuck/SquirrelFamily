@@ -1,15 +1,23 @@
-[gd_scene load_steps=17 format=3 uid="uid://ccdxv26vn66gg"]
+[gd_scene load_steps=19 format=3 uid="uid://ccdxv26vn66gg"]
 
 [ext_resource type="PackedScene" uid="uid://dqk2671mri1gh" path="res://squirrel/squirrel.tscn" id="1_0w128"]
 [ext_resource type="Script" path="res://level/level.gd" id="1_tx1wx"]
 [ext_resource type="PackedScene" uid="uid://cma23htujjnyp" path="res://owl/owl.tscn" id="3_hqqth"]
 [ext_resource type="PackedScene" uid="uid://bwe4xhstgimq2" path="res://hiding_spot/hiding_spot.tscn" id="4_gpj5j"]
+[ext_resource type="Texture2D" uid="uid://p1b6pfvqyepi" path="res://squirrel/squirrel.png" id="4_u1q8o"]
 [ext_resource type="PackedScene" uid="uid://clf6quit13oq7" path="res://boundary/boundary.tscn" id="5_ljrit"]
 [ext_resource type="Texture2D" uid="uid://mk46sjg6ml8" path="res://fish/pond_clean.png" id="6_mabaf"]
 [ext_resource type="Texture2D" uid="uid://bf22kj5o6ll3m" path="res://fish/pond_dirty.png" id="7_f423h"]
 [ext_resource type="Texture2D" uid="uid://01vasd8i8ht4" path="res://fish/fish.png" id="8_0t2b2"]
 [ext_resource type="Texture2D" uid="uid://bauywjo1yeumm" path="res://snake/snake.png" id="9_q41r6"]
 [ext_resource type="Texture2D" uid="uid://djvd352hfunnl" path="res://snake/rock.png" id="10_15j5t"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j007e"]
+texture = ExtResource("4_u1q8o")
+expand_margin_left = 15.0
+expand_margin_top = 15.0
+expand_margin_right = 15.0
+expand_margin_bottom = 15.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3gew0"]
 size = Vector2(101, 100)
@@ -62,6 +70,17 @@ text = "You Lose!"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(640, 360)
+
+[node name="ScreenScrollBar" type="HScrollBar" parent="."]
+z_index = 20
+z_as_relative = false
+offset_top = 50.0
+offset_right = 500.0
+offset_bottom = 58.0
+theme_override_styles/grabber = SubResource("StyleBoxTexture_j007e")
+min_value = -465.0
+max_value = 1750.0
+value = 51.52
 
 [node name="HidingSpot" parent="." instance=ExtResource("4_gpj5j")]
 position = Vector2(-62, 645)

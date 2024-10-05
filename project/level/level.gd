@@ -11,7 +11,7 @@ var _min_x := -975
 @onready var pond_clean: StaticBody2D = $PondClean
 @onready var rock: StaticBody2D = $Rock
 @onready var snake: Area2D = $Snake
-
+@onready var screen_scroll_bar: HScrollBar = $ScreenScrollBar
 
 
 func _ready() -> void:
@@ -50,12 +50,14 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	camera_2d.position.x = clampf(squirrel.position.x, -465, 1750)
-
+	
+	screen_scroll_bar.value = camera_2d.position.x
+	screen_scroll_bar.position.x = camera_2d.position.x - (screen_scroll_bar.size.x / 2)
 
 func _on_owl_game_lost() -> void:
 	game_lost_label.show()
 
 
 func _on_squirrel_game_lost() -> void:
-	game_lost_label.position.x = squirrel.position.x - (game_lost_label.position.x / 2)
+	game_lost_label.position.x = squirrel.position.x - (game_lost_label.size.x / 2)
 	game_lost_label.show()

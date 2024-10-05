@@ -5,8 +5,7 @@ extends Node2D
 @onready var squirrel: Squirrel = $Squirrel
 
 func _physics_process(_delta: float) -> void:
-	camera_2d.position.x = squirrel.position.x
-
+	camera_2d.position.x = clampf(squirrel.position.x, -465, 1750)
 
 func _on_owl_game_lost() -> void:
 	game_lost_label.show()

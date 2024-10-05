@@ -1,10 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccdxv26vn66gg"]
+[gd_scene load_steps=11 format=3 uid="uid://ccdxv26vn66gg"]
 
 [ext_resource type="PackedScene" uid="uid://dqk2671mri1gh" path="res://squirrel/squirrel.tscn" id="1_0w128"]
 [ext_resource type="Script" path="res://level/level.gd" id="1_tx1wx"]
 [ext_resource type="PackedScene" uid="uid://cma23htujjnyp" path="res://owl/owl.tscn" id="3_hqqth"]
 [ext_resource type="PackedScene" uid="uid://bwe4xhstgimq2" path="res://hiding_spot/hiding_spot.tscn" id="4_gpj5j"]
 [ext_resource type="PackedScene" uid="uid://clf6quit13oq7" path="res://boundary/boundary.tscn" id="5_ljrit"]
+[ext_resource type="Texture2D" uid="uid://mk46sjg6ml8" path="res://fish/pond_clean.png" id="6_mabaf"]
+[ext_resource type="Texture2D" uid="uid://bf22kj5o6ll3m" path="res://fish/pond_dirty.png" id="7_f423h"]
+[ext_resource type="Texture2D" uid="uid://01vasd8i8ht4" path="res://fish/fish.png" id="8_0t2b2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gew0"]
+size = Vector2(101, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2tph"]
+size = Vector2(100, 100)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_tx1wx")
@@ -56,6 +65,35 @@ rotation = 1.5708
 [node name="WallLeft" parent="." instance=ExtResource("5_ljrit")]
 position = Vector2(-1160, 0)
 rotation = 1.5708
+
+[node name="PondClean" type="StaticBody2D" parent="."]
+position = Vector2(550, 745)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="PondClean"]
+texture = ExtResource("6_mabaf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PondClean"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_3gew0")
+
+[node name="PondDirty" type="StaticBody2D" parent="."]
+position = Vector2(30.265, 745)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="PondDirty"]
+texture = ExtResource("7_f423h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PondDirty"]
+position = Vector2(-0.264999, 0)
+shape = SubResource("RectangleShape2D_o2tph")
+
+[node name="Fish" type="Sprite2D" parent="."]
+z_index = 2
+z_as_relative = false
+texture = ExtResource("8_0t2b2")
 
 [connection signal="game_lost" from="Squirrel" to="." method="_on_squirrel_game_lost"]
 [connection signal="game_lost" from="Squirrel" to="Owl" method="_on_squirrel_game_lost"]

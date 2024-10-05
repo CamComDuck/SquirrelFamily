@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqk2671mri1gh"]
+[gd_scene load_steps=5 format=3 uid="uid://dqk2671mri1gh"]
 
 [ext_resource type="Script" path="res://squirrel/squirrel.gd" id="1_6rny3"]
 [ext_resource type="Texture2D" uid="uid://p1b6pfvqyepi" path="res://squirrel/squirrel.png" id="2_dmw0i"]
@@ -6,6 +6,10 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m5it4"]
 radius = 33.0
 height = 98.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qnl5n"]
+radius = 50.56
+height = 141.67
 
 [node name="Squirrel" type="CharacterBody2D"]
 script = ExtResource("1_6rny3")
@@ -15,3 +19,8 @@ texture = ExtResource("2_dmw0i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_m5it4")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+shape = SubResource("CapsuleShape2D_qnl5n")
+target_position = Vector2(0, 0)
+collision_mask = 3

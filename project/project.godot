@@ -24,6 +24,8 @@ window/size/resizable=false
 [file_customization]
 
 folder_colors={
+"res://boundary/": "red",
+"res://fish/": "green",
 "res://hiding_spot/": "yellow",
 "res://level/": "orange",
 "res://owl/": "yellow",

@@ -29,6 +29,7 @@ folder_colors={
 "res://hiding_spot/": "yellow",
 "res://level/": "orange",
 "res://owl/": "yellow",
+"res://snake/": "green",
 "res://squirrel/": "yellow",
 "res://title/": "orange"
 }

@@ -7,6 +7,7 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
 
 var _can_move := true
+var _can_hide := false
 
 
 func _physics_process(delta: float) -> void:
@@ -22,9 +23,21 @@ func _physics_process(delta: float) -> void:
 			velocity.x = direction * SPEED
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
+			
+		if Input.is_action_just_pressed("action") and _can_hide:
+			visible = false
+			_can_hide = false
+			_can_move = false
 
 		move_and_slide()
 		for i in get_slide_collision_count():
 			if get_slide_collision(i).get_collider().name == "Owl":
 				game_lost.emit()
 				_can_move = false
+			elif get_slide_collision(i).get_collider().name == "HidingSpot":
+				_can_hide = true
+	
+	elif Input.is_action_just_pressed("action") and not _can_hide:
+		print ("test")
+		visible = true
+		_can_move = true

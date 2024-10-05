@@ -1,12 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccdxv26vn66gg"]
+[gd_scene load_steps=8 format=3 uid="uid://ccdxv26vn66gg"]
 
 [ext_resource type="PackedScene" uid="uid://dqk2671mri1gh" path="res://squirrel/squirrel.tscn" id="1_0w128"]
 [ext_resource type="Script" path="res://level/level.gd" id="1_tx1wx"]
 [ext_resource type="Texture2D" uid="uid://dm1gq15mellvd" path="res://level/floor.png" id="2_3udfn"]
 [ext_resource type="PackedScene" uid="uid://cma23htujjnyp" path="res://owl/owl.tscn" id="3_hqqth"]
+[ext_resource type="Texture2D" uid="uid://b4jvsoh3kvrmj" path="res://level/hiding_spot.png" id="5_t67w6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xrhw"]
 size = Vector2(100.133, 99)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pq6d4"]
+size = Vector2(101, 101)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_tx1wx")
@@ -14,14 +18,14 @@ script = ExtResource("1_tx1wx")
 [node name="Squirrel" parent="." instance=ExtResource("1_0w128")]
 position = Vector2(351, 510)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(642.405, 720)
 scale = Vector2(15, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Floor"]
 texture = ExtResource("2_3udfn")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 position = Vector2(-0.160336, -0.5)
 shape = SubResource("RectangleShape2D_0xrhw")
 
@@ -43,6 +47,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 100
 text = "You Lose!"
+
+[node name="HidingSpot" type="StaticBody2D" parent="."]
+position = Vector2(800, 610)
+
+[node name="Sprite2D" type="Sprite2D" parent="HidingSpot"]
+texture = ExtResource("5_t67w6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HidingSpot"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_pq6d4")
 
 [connection signal="game_lost" from="Squirrel" to="." method="_on_squirrel_game_lost"]
 [connection signal="game_lost" from="Squirrel" to="Owl" method="_on_squirrel_game_lost"]

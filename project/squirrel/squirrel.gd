@@ -20,10 +20,10 @@ var _object_in_hand : String = "NONE"
 @onready var pond_dirty: StaticBody2D = $"../PondDirty"
 @onready var rock: StaticBody2D = $"../Rock"
 @onready var snake: Area2D = $"../Snake"
-
+@onready var bite_progress_bar: ProgressBar = $"../Snake/BiteProgressBar"
+@onready var bite_timer: Timer = $"../Snake/BiteTimer"
 
 func _physics_process(delta: float) -> void:
-	print ("Object in hand: " + str(_object_in_hand))
 	if _can_move:
 		if not is_on_floor():
 			velocity += get_gravity() * delta
@@ -32,6 +32,7 @@ func _physics_process(delta: float) -> void:
 			fish.position = position
 		elif _object_in_hand == "SNAKE":
 			snake.position = position
+			bite_progress_bar.value = (bite_timer.time_left / bite_timer.wait_time) * 100
 
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
@@ -90,12 +91,19 @@ func _physics_process(delta: float) -> void:
 					_snake_on_rock = true
 					_object_in_hand = "NONE"
 					snake.position = rock.position
+					
+					bite_timer.stop()
+					bite_progress_bar.hide()
 			
 			elif shape_cast_2d.get_collider(i).name == "Snake":
 				
 				if Input.is_action_just_pressed("action") and _object_in_hand == "NONE":
 					_object_in_hand = "SNAKE"
 					_snake_on_rock = false
+					
+					bite_timer.wait_time = randf_range(10, 15)
+					bite_timer.start()
+					bite_progress_bar.show()
 			
 			else:
 				_hiding_spot_position = Vector2.ZERO
@@ -107,4 +115,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_owl_game_lost() -> void:
+	_can_move = false
+
+
+func _on_bite_timer_timeout() -> void:
+	game_lost.emit()
 	_can_move = false

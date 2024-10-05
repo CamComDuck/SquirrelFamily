@@ -26,12 +26,13 @@ window/size/resizable=false
 folder_colors={
 "res://boundary/": "red",
 "res://fish/": "green",
-"res://hiding_spot/": "yellow",
 "res://level/": "orange",
 "res://owl/": "yellow",
+"res://rabbit/": "green",
 "res://snake/": "green",
 "res://squirrel/": "yellow",
-"res://title/": "orange"
+"res://title/": "orange",
+"res://tree/": "yellow"
 }
 
 [input]

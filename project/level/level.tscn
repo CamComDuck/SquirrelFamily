@@ -1,9 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://ccdxv26vn66gg"]
+[gd_scene load_steps=21 format=3 uid="uid://ccdxv26vn66gg"]
 
 [ext_resource type="PackedScene" uid="uid://dqk2671mri1gh" path="res://squirrel/squirrel.tscn" id="1_0w128"]
 [ext_resource type="Script" path="res://level/level.gd" id="1_tx1wx"]
 [ext_resource type="PackedScene" uid="uid://cma23htujjnyp" path="res://owl/owl.tscn" id="3_hqqth"]
-[ext_resource type="PackedScene" uid="uid://bwe4xhstgimq2" path="res://hiding_spot/hiding_spot.tscn" id="4_gpj5j"]
 [ext_resource type="Texture2D" uid="uid://p1b6pfvqyepi" path="res://squirrel/squirrel.png" id="4_u1q8o"]
 [ext_resource type="PackedScene" uid="uid://clf6quit13oq7" path="res://boundary/boundary.tscn" id="5_ljrit"]
 [ext_resource type="Texture2D" uid="uid://mk46sjg6ml8" path="res://fish/pond_clean.png" id="6_mabaf"]
@@ -11,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://01vasd8i8ht4" path="res://fish/fish.png" id="8_0t2b2"]
 [ext_resource type="Texture2D" uid="uid://bauywjo1yeumm" path="res://snake/snake.png" id="9_q41r6"]
 [ext_resource type="Texture2D" uid="uid://djvd352hfunnl" path="res://snake/rock.png" id="10_15j5t"]
+[ext_resource type="Script" path="res://rabbit/rabbit.gd" id="11_hiuto"]
+[ext_resource type="Texture2D" uid="uid://nomgbcxffi5d" path="res://rabbit/rabbit.png" id="12_1gm8o"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j007e"]
 texture = ExtResource("4_u1q8o")
@@ -36,6 +37,9 @@ bg_color = Color(0.396078, 1, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4d756"]
 radius = 46.15
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xjxph"]
+size = Vector2(90, 77)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_tx1wx")
@@ -82,9 +86,6 @@ min_value = -465.0
 max_value = 1750.0
 value = 51.52
 
-[node name="HidingSpot" parent="." instance=ExtResource("4_gpj5j")]
-position = Vector2(-62, 645)
-
 [node name="Ceiling" parent="." instance=ExtResource("5_ljrit")]
 position = Vector2(643, -50)
 
@@ -124,13 +125,13 @@ position = Vector2(-0.264999, 0)
 shape = SubResource("RectangleShape2D_o2tph")
 
 [node name="Fish" type="Sprite2D" parent="."]
-z_index = 2
+z_index = 6
 z_as_relative = false
 position = Vector2(-245, 136)
 texture = ExtResource("8_0t2b2")
 
 [node name="Snake" type="Area2D" parent="."]
-z_index = 5
+z_index = 6
 z_as_relative = false
 position = Vector2(-334, 652)
 
@@ -162,6 +163,8 @@ show_percentage = false
 one_shot = true
 
 [node name="Rock" type="StaticBody2D" parent="."]
+z_index = 5
+z_as_relative = false
 position = Vector2(144.01, 661)
 collision_layer = 2
 collision_mask = 2
@@ -171,6 +174,17 @@ texture = ExtResource("10_15j5t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rock"]
 shape = SubResource("CircleShape2D_4d756")
+
+[node name="Rabbit" type="CharacterBody2D" parent="."]
+position = Vector2(-107.95, 663.81)
+script = ExtResource("11_hiuto")
+
+[node name="Sprite2D" type="Sprite2D" parent="Rabbit"]
+texture = ExtResource("12_1gm8o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rabbit"]
+position = Vector2(-1, -1.5)
+shape = SubResource("RectangleShape2D_xjxph")
 
 [connection signal="game_lost" from="Squirrel" to="." method="_on_squirrel_game_lost"]
 [connection signal="game_lost" from="Squirrel" to="Owl" method="_on_squirrel_game_lost"]

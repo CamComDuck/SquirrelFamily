@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b4jvsoh3kvrmj"
-path="res://.godot/imported/hiding_spot.png-23e2a1f67f29424d11752288f8ab22cb.ctex"
+path="res://.godot/imported/tree.png-bcbe493c767031e98ccce18e96cbef3d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level/hiding_spot.png"
-dest_files=["res://.godot/imported/hiding_spot.png-23e2a1f67f29424d11752288f8ab22cb.ctex"]
+source_file="res://tree/tree.png"
+dest_files=["res://.godot/imported/tree.png-bcbe493c767031e98ccce18e96cbef3d.ctex"]
 
 [params]
 

@@ -1,16 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwe4xhstgimq2"]
+[gd_scene load_steps=4 format=3 uid="uid://bwe4xhstgimq2"]
 
-[ext_resource type="Texture2D" uid="uid://b4jvsoh3kvrmj" path="res://level/hiding_spot.png" id="1_jjuk0"]
+[ext_resource type="Script" path="res://tree/tree.gd" id="1_ng84d"]
+[ext_resource type="Texture2D" uid="uid://b4jvsoh3kvrmj" path="res://tree/tree.png" id="2_780y2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ybjr"]
 size = Vector2(101, 101)
 
-[node name="HidingSpot" type="StaticBody2D"]
+[node name="Tree" type="Area2D"]
 collision_layer = 2
 collision_mask = 2
+script = ExtResource("1_ng84d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_jjuk0")
+texture = ExtResource("2_780y2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -0.5)

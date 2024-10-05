@@ -1,7 +1,7 @@
 extends Node2D
 
-var _max_x := 2250
-var _min_x := -975
+var _max_x := 2350
+var _min_x := -1075
 
 @onready var game_lost_label: Label = $GameLostLabel
 @onready var camera_2d: Camera2D = $Camera2D
@@ -12,6 +12,7 @@ var _min_x := -975
 @onready var rock: StaticBody2D = $Rock
 @onready var snake: Area2D = $Snake
 @onready var screen_scroll_bar: HScrollBar = $ScreenScrollBar
+@onready var tree: PackedScene = load("res://tree/tree.tscn")
 
 
 func _ready() -> void:
@@ -46,7 +47,18 @@ func _ready() -> void:
 		rock.set_position(Vector2(rock_random_1, 661))
 	else:
 		rock.set_position(Vector2(rock_random_2, 661))
-
+		
+	
+	# Spawn hiding spot trees
+	
+	var last_tree : float = _max_x
+	
+	for i in 10:
+		var _spawn : Area2D = tree.instantiate()
+		add_child(_spawn)
+		var tree_x = randf_range(last_tree - 350, last_tree - 500)
+		_spawn.position = Vector2(tree_x, 655)
+		last_tree = tree_x
 
 func _physics_process(_delta: float) -> void:
 	camera_2d.position.x = clampf(squirrel.position.x, -465, 1750)

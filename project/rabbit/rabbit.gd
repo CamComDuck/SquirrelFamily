@@ -1,0 +1,2 @@
+class_name Rabbit
+extends CharacterBody2D

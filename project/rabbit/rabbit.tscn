@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://byn8m7sodymwu"]
+
+[ext_resource type="Script" path="res://rabbit/rabbit.gd" id="1_1b5jy"]
+[ext_resource type="Texture2D" uid="uid://nomgbcxffi5d" path="res://rabbit/rabbit.png" id="2_kvk2u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxm5f"]
+size = Vector2(90, 77)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dy1mr"]
+size = Vector2(100, 100)
+
+[node name="Rabbit" type="CharacterBody2D"]
+z_index = 6
+z_as_relative = false
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_1b5jy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_kvk2u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1.5)
+shape = SubResource("RectangleShape2D_uxm5f")
+
+[node name="MoveTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+shape = SubResource("RectangleShape2D_dy1mr")
+target_position = Vector2(0, 0)
+collision_mask = 3
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ccdxv26vn66gg"]
+[gd_scene load_steps=19 format=3 uid="uid://ccdxv26vn66gg"]
 
 [ext_resource type="PackedScene" uid="uid://dqk2671mri1gh" path="res://squirrel/squirrel.tscn" id="1_0w128"]
 [ext_resource type="Script" path="res://level/level.gd" id="1_tx1wx"]
@@ -10,8 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://01vasd8i8ht4" path="res://fish/fish.png" id="8_0t2b2"]
 [ext_resource type="Texture2D" uid="uid://bauywjo1yeumm" path="res://snake/snake.png" id="9_q41r6"]
 [ext_resource type="Texture2D" uid="uid://djvd352hfunnl" path="res://snake/rock.png" id="10_15j5t"]
-[ext_resource type="Script" path="res://rabbit/rabbit.gd" id="11_hiuto"]
-[ext_resource type="Texture2D" uid="uid://nomgbcxffi5d" path="res://rabbit/rabbit.png" id="12_1gm8o"]
+[ext_resource type="PackedScene" uid="uid://byn8m7sodymwu" path="res://rabbit/rabbit.tscn" id="11_vl36j"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j007e"]
 texture = ExtResource("4_u1q8o")
@@ -37,9 +36,6 @@ bg_color = Color(0.396078, 1, 0, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4d756"]
 radius = 46.15
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xjxph"]
-size = Vector2(90, 77)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_tx1wx")
@@ -175,16 +171,8 @@ texture = ExtResource("10_15j5t")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rock"]
 shape = SubResource("CircleShape2D_4d756")
 
-[node name="Rabbit" type="CharacterBody2D" parent="."]
-position = Vector2(-107.95, 663.81)
-script = ExtResource("11_hiuto")
-
-[node name="Sprite2D" type="Sprite2D" parent="Rabbit"]
-texture = ExtResource("12_1gm8o")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rabbit"]
-position = Vector2(-1, -1.5)
-shape = SubResource("RectangleShape2D_xjxph")
+[node name="Rabbit" parent="." instance=ExtResource("11_vl36j")]
+position = Vector2(-112, 644)
 
 [connection signal="game_lost" from="Squirrel" to="." method="_on_squirrel_game_lost"]
 [connection signal="game_lost" from="Squirrel" to="Owl" method="_on_squirrel_game_lost"]

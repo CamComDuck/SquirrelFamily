@@ -26,7 +26,6 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			
 		if Input.is_action_just_pressed("action") and _hiding_spot_position != Vector2.ZERO:
-			print ("hiding!")
 			visible = false
 			position = _hiding_spot_position
 			_hiding_spot_position = Vector2.ZERO
@@ -35,17 +34,19 @@ func _physics_process(delta: float) -> void:
 
 		move_and_slide()
 		for i in get_slide_collision_count():
-			#print("Colliding With: " + str(get_slide_collision(i).get_collider().name))
-			#if get_slide_collision(i).get_collider().name == "Owl":
-				#game_lost.emit()
-				#_can_move = false
-			if get_slide_collision(i).get_collider().name == "HidingSpot":
+			if get_slide_collision(i).get_collider().name == "Owl":
+				game_lost.emit()
+				_can_move = false
+			elif get_slide_collision(i).get_collider().name == "HidingSpot":
 				_hiding_spot_position = get_slide_collision(i).get_position()
 			else:
 				_hiding_spot_position = Vector2.ZERO
 	
 	elif Input.is_action_just_pressed("action") and _is_hiding:
-		print("Unhide!")
 		position = Vector2(position.x, position.y + 10)
 		visible = true
 		_can_move = true
+
+
+func _on_owl_game_lost() -> void:
+	_can_move = false

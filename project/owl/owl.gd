@@ -1,12 +1,14 @@
 class_name Owl
 extends RigidBody2D
 
+signal game_lost
+
 var _moving_left : bool
-var _max_x := 1230
-var _min_x := 50
+var _max_x := 2350
+var _min_x := -1075
 var _max_y := 100
 var _min_y := -100
-var _move_speed := 2500
+var _move_speed := 50000
 var _is_hunting := false
 var _is_diving := false
 var _dive_x : float
@@ -26,10 +28,9 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if _can_move:
-		print ("Hunting: " + str(_is_hunting) + " | Diving: " + str(_is_diving))
 		if not _is_hunting and not _is_diving:
 			_movement(delta, 0)
-			var hunt_chance : float = randf_range(0, 100)
+			var hunt_chance : float = randf_range(0, 1500)
 			if hunt_chance < 2: # Starts hunt
 				_is_hunting = true
 				_is_diving = true
@@ -50,7 +51,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _movement(delta : float, y_dir : int) -> void:
-	var motion : Vector2
 	if position.x < _max_x and not _moving_left:
 		linear_velocity = Vector2(_move_speed * delta, y_dir)
 	elif position.x >= _max_x and not _moving_left:
@@ -68,11 +68,18 @@ func _on_hunt_timer_timeout() -> void:
 
 func _on_squirrel_game_lost() -> void:
 	_can_move = false
+	linear_velocity = Vector2.ZERO
 
 
 func _on_body_entered(body: Node) -> void:
-	print (body.name)
-	_is_diving = false
+	if body.name != "WallRight" and body.name != "WallLeft":
+		_is_diving = false
 	
-	if body.name != "Floor" and body.name != "Ceiling":
+	
+	if body.name == "Squirrel":
+		game_lost.emit()
+		_can_move = false
+		linear_velocity = Vector2.ZERO
+	
+	elif body.name != "Floor" and body.name != "Ceiling":
 		_moving_left = not _moving_left

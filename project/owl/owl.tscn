@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cma23htujjnyp"]
+
+[ext_resource type="Texture2D" uid="uid://cfu3ii6ujo500" path="res://owl/owl.png" id="1_3he4w"]
+[ext_resource type="Script" path="res://owl/owl.gd" id="1_ldg1v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ri4g2"]
+size = Vector2(100, 101)
+
+[node name="Owl" type="CharacterBody2D"]
+script = ExtResource("1_ldg1v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3he4w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_ri4g2")
+
+[node name="HuntTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="HuntTimer" to="." method="_on_hunt_timer_timeout"]

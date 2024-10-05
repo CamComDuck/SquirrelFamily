@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccdxv26vn66gg"]
+
+[ext_resource type="PackedScene" uid="uid://dqk2671mri1gh" path="res://squirrel/squirrel.tscn" id="1_0w128"]
+[ext_resource type="Script" path="res://level/level.gd" id="1_tx1wx"]
+[ext_resource type="Texture2D" uid="uid://dm1gq15mellvd" path="res://level/floor.png" id="2_3udfn"]
+[ext_resource type="PackedScene" uid="uid://cma23htujjnyp" path="res://owl/owl.tscn" id="3_hqqth"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xrhw"]
+size = Vector2(100.133, 99)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_tx1wx")
+
+[node name="Squirrel" parent="." instance=ExtResource("1_0w128")]
+position = Vector2(351, 510)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(642.405, 720)
+scale = Vector2(15, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("2_3udfn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-0.160336, -0.5)
+shape = SubResource("RectangleShape2D_0xrhw")
+
+[node name="Owl" parent="." instance=ExtResource("3_hqqth")]
+position = Vector2(884, 60)
+
+[node name="GameLostLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 409.0
+offset_top = 293.0
+offset_right = 868.0
+offset_bottom = 430.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "You Lose!"
+
+[connection signal="game_lost" from="Squirrel" to="." method="_on_squirrel_game_lost"]
+[connection signal="game_lost" from="Squirrel" to="Owl" method="_on_squirrel_game_lost"]

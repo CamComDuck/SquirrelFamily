@@ -7,7 +7,8 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
 
 var _can_move := true
-var _can_hide := false
+var _hiding_spot_position : Vector2
+var _is_hiding := false
 
 
 func _physics_process(delta: float) -> void:
@@ -24,20 +25,27 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			
-		if Input.is_action_just_pressed("action") and _can_hide:
+		if Input.is_action_just_pressed("action") and _hiding_spot_position != Vector2.ZERO:
+			print ("hiding!")
 			visible = false
-			_can_hide = false
+			position = _hiding_spot_position
+			_hiding_spot_position = Vector2.ZERO
 			_can_move = false
+			_is_hiding = true
 
 		move_and_slide()
 		for i in get_slide_collision_count():
+			print("Colliding With: " + str(get_slide_collision(i).get_collider().name))
 			if get_slide_collision(i).get_collider().name == "Owl":
 				game_lost.emit()
 				_can_move = false
 			elif get_slide_collision(i).get_collider().name == "HidingSpot":
-				_can_hide = true
+				_hiding_spot_position = get_slide_collision(i).get_position()
+			else:
+				_hiding_spot_position = Vector2.ZERO
 	
-	elif Input.is_action_just_pressed("action") and not _can_hide:
-		print ("test")
+	elif Input.is_action_just_pressed("action") and _is_hiding:
+		print("Unhide!")
+		position = Vector2(position.x, position.y + 10)
 		visible = true
 		_can_move = true

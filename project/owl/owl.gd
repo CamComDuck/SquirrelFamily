@@ -10,7 +10,7 @@ var _move_speed := 150
 var _is_hunting := false
 var _is_diving := false
 var _dive_x : float
-var _can_move : bool = true
+var _can_move : bool = false
 
 @onready var _hunt_timer_object : Timer = $HuntTimer
 

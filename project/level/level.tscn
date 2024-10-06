@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ccdxv26vn66gg"]
+[gd_scene load_steps=24 format=4 uid="uid://ccdxv26vn66gg"]
 
 [ext_resource type="PackedScene" uid="uid://dqk2671mri1gh" path="res://squirrel/squirrel.tscn" id="1_0w128"]
 [ext_resource type="Script" path="res://level/level.gd" id="1_tx1wx"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://bauywjo1yeumm" path="res://snake/snake.png" id="9_q41r6"]
 [ext_resource type="Texture2D" uid="uid://djvd352hfunnl" path="res://snake/rock.png" id="10_15j5t"]
 [ext_resource type="PackedScene" uid="uid://byn8m7sodymwu" path="res://rabbit/rabbit.tscn" id="11_vl36j"]
+[ext_resource type="Texture2D" uid="uid://mwg5wrlu1nfk" path="res://level/ground_dirt.png" id="12_gakvb"]
+[ext_resource type="Texture2D" uid="uid://dfm84knfyvvbb" path="res://level/ground_grass.png" id="13_gns5x"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j007e"]
 texture = ExtResource("4_u1q8o")
@@ -37,23 +39,44 @@ bg_color = Color(0.396078, 1, 0, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_4d756"]
 radius = 46.15
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yw3fh"]
+texture = ExtResource("12_gakvb")
+texture_region_size = Vector2i(100, 100)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-50, -50, 50, -50, 50, 50, -50, 50)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n7w00"]
+texture = ExtResource("13_gns5x")
+texture_region_size = Vector2i(100, 100)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-50, -50, 50, -50, 50, 50, -50, 50)
+
+[sub_resource type="TileSet" id="TileSet_4xi38"]
+tile_size = Vector2i(100, 100)
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
+sources/2 = SubResource("TileSetAtlasSource_yw3fh")
+sources/3 = SubResource("TileSetAtlasSource_n7w00")
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_tx1wx")
 
 [node name="Squirrel" parent="." instance=ExtResource("1_0w128")]
 z_index = 9
 z_as_relative = false
-position = Vector2(351, 510)
+position = Vector2(639, 265)
 collision_layer = 3
 collision_mask = 3
 
 [node name="Owl" parent="." instance=ExtResource("3_hqqth")]
 z_index = 10
 z_as_relative = false
-position = Vector2(-1075, 60)
+position = Vector2(-1006, 69)
 
 [node name="GameEndLabel" type="Label" parent="."]
 visible = false
+z_index = 25
+z_as_relative = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -97,7 +120,9 @@ position = Vector2(-1160, 0)
 rotation = 1.5708
 
 [node name="PondClean" type="StaticBody2D" parent="."]
-position = Vector2(550, 745)
+z_index = 2
+z_as_relative = false
+position = Vector2(550, 751)
 collision_layer = 2
 collision_mask = 2
 
@@ -109,7 +134,9 @@ position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_3gew0")
 
 [node name="PondDirty" type="StaticBody2D" parent="."]
-position = Vector2(30.265, 745)
+z_index = 2
+z_as_relative = false
+position = Vector2(30.265, 751)
 collision_layer = 2
 collision_mask = 2
 
@@ -123,13 +150,14 @@ shape = SubResource("RectangleShape2D_o2tph")
 [node name="Fish" type="Sprite2D" parent="."]
 z_index = 6
 z_as_relative = false
-position = Vector2(-245, 136)
+position = Vector2(29.735, 730.385)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_0t2b2")
 
 [node name="Snake" type="Area2D" parent="."]
 z_index = 6
 z_as_relative = false
-position = Vector2(-334, 652)
+position = Vector2(148.09, 469.65)
 
 [node name="Sprite2D" type="Sprite2D" parent="Snake"]
 texture = ExtResource("9_q41r6")
@@ -139,6 +167,8 @@ shape = SubResource("CircleShape2D_tepdp")
 
 [node name="BiteProgressBar" type="ProgressBar" parent="Snake"]
 visible = false
+z_index = 24
+z_as_relative = false
 custom_minimum_size = Vector2(120.08, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -161,7 +191,7 @@ one_shot = true
 [node name="Rock" type="StaticBody2D" parent="."]
 z_index = 5
 z_as_relative = false
-position = Vector2(144.01, 661)
+position = Vector2(144.01, 440.96)
 collision_layer = 2
 collision_mask = 2
 
@@ -172,7 +202,11 @@ texture = ExtResource("10_15j5t")
 shape = SubResource("CircleShape2D_4d756")
 
 [node name="Rabbit" parent="." instance=ExtResource("11_vl36j")]
-position = Vector2(751, 603)
+position = Vector2(751, 423.655)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAKAAYAAgAAAAAAAAALAAYAAgAAAAAAAAAMAAYAAgAAAAAAAAANAAYAAgAAAAAAAAAOAAYAAgAAAAAAAAAPAAYAAgAAAAAAAAAQAAYAAgAAAAAAAAAKAAUAAwAAAAAAAAALAAUAAwAAAAAAAAAMAAUAAwAAAAAAAAANAAUAAwAAAAAAAAAOAAUAAwAAAAAAAAAPAAUAAwAAAAAAAAAQAAUAAwAAAAAAAAARAAUAAwAAAAAAAAASAAUAAwAAAAAAAAATAAUAAwAAAAAAAAAUAAUAAwAAAAAAAAAVAAUAAwAAAAAAAAAWAAUAAwAAAAAAAAAXAAUAAwAAAAAAAAAJAAUAAwAAAAAAAAAIAAUAAwAAAAAAAAAHAAUAAwAAAAAAAAAGAAUAAwAAAAAAAAAFAAUAAwAAAAAAAAAEAAUAAwAAAAAAAAADAAUAAwAAAAAAAAACAAUAAwAAAAAAAAABAAUAAwAAAAAAAAAAAAUAAwAAAAAAAAD//wUAAwAAAAAAAAD+/wUAAwAAAAAAAAD9/wUAAwAAAAAAAAD8/wUAAwAAAAAAAAD7/wUAAwAAAAAAAAD6/wUAAwAAAAAAAAD5/wUAAwAAAAAAAAD4/wUAAwAAAAAAAAD3/wUAAwAAAAAAAAD2/wUAAwAAAAAAAAD1/wUAAwAAAAAAAAD1/wYAAgAAAAAAAAD1/wcAAgAAAAAAAAD2/wcAAgAAAAAAAAD2/wYAAgAAAAAAAAD3/wYAAgAAAAAAAAD4/wYAAgAAAAAAAAD5/wYAAgAAAAAAAAD6/wYAAgAAAAAAAAD7/wYAAgAAAAAAAAD8/wYAAgAAAAAAAAD9/wYAAgAAAAAAAAD+/wYAAgAAAAAAAAD//wYAAgAAAAAAAAAAAAYAAgAAAAAAAAABAAYAAgAAAAAAAAACAAYAAgAAAAAAAAADAAYAAgAAAAAAAAAEAAYAAgAAAAAAAAAFAAYAAgAAAAAAAAAGAAYAAgAAAAAAAAAHAAYAAgAAAAAAAAAIAAYAAgAAAAAAAAAJAAYAAgAAAAAAAAARAAYAAgAAAAAAAAASAAYAAgAAAAAAAAATAAYAAgAAAAAAAAAUAAYAAgAAAAAAAAAVAAYAAgAAAAAAAAAWAAYAAgAAAAAAAAAXAAYAAgAAAAAAAAAXAAcAAgAAAAAAAAAWAAcAAgAAAAAAAAAVAAcAAgAAAAAAAAAUAAcAAgAAAAAAAAATAAcAAgAAAAAAAAASAAcAAgAAAAAAAAARAAcAAgAAAAAAAAAQAAcAAgAAAAAAAAAPAAcAAgAAAAAAAAAOAAcAAgAAAAAAAAANAAcAAgAAAAAAAAAMAAcAAgAAAAAAAAALAAcAAgAAAAAAAAAKAAcAAgAAAAAAAAAJAAcAAgAAAAAAAAAIAAcAAgAAAAAAAAAHAAcAAgAAAAAAAAAGAAcAAgAAAAAAAAAFAAcAAgAAAAAAAAAEAAcAAgAAAAAAAAADAAcAAgAAAAAAAAACAAcAAgAAAAAAAAABAAcAAgAAAAAAAAAAAAcAAgAAAAAAAAD//wcAAgAAAAAAAAD+/wcAAgAAAAAAAAD9/wcAAgAAAAAAAAD8/wcAAgAAAAAAAAD7/wcAAgAAAAAAAAD6/wcAAgAAAAAAAAD5/wcAAgAAAAAAAAD4/wcAAgAAAAAAAAD3/wcAAgAAAAAAAAA=")
+tile_set = SubResource("TileSet_4xi38")
 
 [connection signal="game_lost" from="Squirrel" to="." method="_on_squirrel_game_lost"]
 [connection signal="game_lost" from="Squirrel" to="Owl" method="_on_squirrel_game_lost"]

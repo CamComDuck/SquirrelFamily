@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 	
 	elif _is_hiding:
 		velocity.x = 0
-		if position.y > 500:
+		if position.y > 300:
 			velocity.y = JUMP_VELOCITY
 		else:
 			velocity.y = 0
@@ -57,12 +57,12 @@ func _physics_process(delta: float) -> void:
 		
 	
 	if _object_in_hand == "FISH":
-		fish.position = position
+		fish.position = Vector2(position.x + 50, position.y)
 	elif _object_in_hand == "SNAKE":
-		snake.position = position
+		snake.position = Vector2(position.x + 50, position.y)
 		bite_progress_bar.value = (bite_timer.time_left / bite_timer.wait_time) * 100
 	elif _object_in_hand == "RABBIT":
-		rabbit.position = Vector2(position.x, position.y - 125)
+		rabbit.position = Vector2(position.x + 65, position.y)
 	
 			
 	# HANDLE COLLISIONS
@@ -80,6 +80,7 @@ func _physics_process(delta: float) -> void:
 				_object_in_hand = "NONE"
 				rabbit_placed_in_tree.emit()
 				_rabbit_in_tree = true
+				rabbit.scale = Vector2(1, 1)
 				
 			elif Input.is_action_just_pressed("action") and not _is_hiding:
 				_is_hiding = true
@@ -89,35 +90,42 @@ func _physics_process(delta: float) -> void:
 			
 			if Input.is_action_just_pressed("action") and not _fish_in_clean_pond and _object_in_hand == "NONE":
 				_object_in_hand = "FISH"
+				fish.scale = Vector2(0.25, 0.25)
 			elif Input.is_action_just_pressed("action") and not _fish_in_clean_pond and _object_in_hand == "FISH":
 				_object_in_hand = "NONE"
-				fish.position = pond_dirty.position
+				fish.position = Vector2(pond_dirty.position.x, pond_dirty.position.y - 20.615)
+				fish.scale = Vector2(0.5, 0.5)
 				
 		elif shape_cast_2d.get_collider(i).name == "PondClean":
 			
 			if Input.is_action_just_pressed("action") and not _fish_in_clean_pond and _object_in_hand == "FISH":
 				_fish_in_clean_pond = true
 				_object_in_hand = "NONE"
-				fish.position = pond_clean.position
+				fish.position = Vector2(pond_clean.position.x, pond_clean.position.y - 20.615)
+				fish.scale = Vector2(0.5, 0.5)
 			elif Input.is_action_just_pressed("action") and _fish_in_clean_pond and _object_in_hand == "NONE":
 				_fish_in_clean_pond = false
 				_object_in_hand = "FISH"
+				fish.scale = Vector2(0.25, 0.25)
 				
 		elif shape_cast_2d.get_collider(i).name == "Rock":
 			
 			if Input.is_action_just_pressed("action") and not _snake_on_rock and _object_in_hand == "SNAKE":
 				_snake_on_rock = true
 				_object_in_hand = "NONE"
-				snake.position = rock.position
+				snake.position.x = rock.position.x + 4.08
+				snake.position.y = rock.position.y - 55.92
+				snake.scale = Vector2(1, 1)
 				
 				bite_timer.stop()
 				bite_progress_bar.hide()
 		
 		elif shape_cast_2d.get_collider(i).name == "Snake":
 			
-			if Input.is_action_just_pressed("action") and _object_in_hand == "NONE":
+			if Input.is_action_just_pressed("action") and _object_in_hand == "NONE" and not _snake_on_rock:
 				_object_in_hand = "SNAKE"
 				_snake_on_rock = false
+				snake.scale = Vector2(0.25, 0.25)
 				
 				bite_timer.wait_time = randf_range(8, 10)
 				bite_timer.start()
@@ -128,6 +136,7 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed("action") and _object_in_hand == "NONE":
 				_object_in_hand = "RABBIT"
 				rabbit_picked_up.emit()
+				rabbit.scale = Vector2(0.25, 0.25)
 
 	
 	if _fish_in_clean_pond and _snake_on_rock and _rabbit_in_tree:

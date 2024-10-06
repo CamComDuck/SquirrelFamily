@@ -10,7 +10,7 @@ var _move_speed := 50000
 var _is_hunting := false
 var _is_diving := false
 var _dive_x : float
-var _can_move : bool = true
+var _can_move : bool = false
 
 @onready var _hunt_timer_object : Timer = $HuntTimer
 
@@ -77,7 +77,7 @@ func _on_body_entered(body: Node) -> void:
 		_can_move = false
 		linear_velocity = Vector2.ZERO
 	
-	elif body.name != "Floor" and body.name != "Ceiling":
+	elif body.name != "Floor" and body.name != "Ceiling" and body.name != "TileMapLayer":
 		_moving_left = not _moving_left
 
 

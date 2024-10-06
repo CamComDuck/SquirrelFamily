@@ -1,19 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwe4xhstgimq2"]
+[gd_scene load_steps=5 format=3 uid="uid://bwe4xhstgimq2"]
 
 [ext_resource type="Script" path="res://tree/tree.gd" id="1_ng84d"]
-[ext_resource type="Texture2D" uid="uid://b4jvsoh3kvrmj" path="res://tree/tree.png" id="2_780y2"]
+[ext_resource type="Texture2D" uid="uid://bdtswhkslams7" path="res://tree/tree_middle.png" id="2_llmfl"]
+[ext_resource type="Texture2D" uid="uid://148d2pucwgun" path="res://tree/tree_top.png" id="3_hskns"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ybjr"]
-size = Vector2(101, 101)
+size = Vector2(51, 100)
 
 [node name="Tree" type="Area2D"]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_ng84d")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_780y2")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -0.5)
+position = Vector2(-3.5, 50)
 shape = SubResource("RectangleShape2D_2ybjr")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = ExtResource("2_llmfl")
+offset = Vector2(0, 50)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+texture = ExtResource("3_hskns")
+offset = Vector2(0, -50)

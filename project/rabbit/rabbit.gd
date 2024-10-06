@@ -9,6 +9,7 @@ const JUMP_VELOCITY = -500.0
 var _can_move := true
 var _is_moving := true
 var _direction : int
+var _in_tree := false
 
 @onready var move_timer: Timer = $MoveTimer
 @onready var shape_cast_2d: ShapeCast2D = $ShapeCast2D
@@ -38,6 +39,14 @@ func _physics_process(delta: float) -> void:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 
 		move_and_slide()
+	
+	elif _in_tree:
+		velocity.x = 0
+		if position.y > 300:
+			velocity.y = JUMP_VELOCITY
+		else:
+			velocity.y = 0
+		move_and_slide()
 
 	for i in shape_cast_2d.get_collision_count():
 		var collision = shape_cast_2d.get_collider(i).name
@@ -60,6 +69,7 @@ func _on_squirrel_rabbit_picked_up() -> void:
 func _on_squirrel_rabbit_placed_in_tree() -> void:
 	escape_timer.wait_time = randf_range(5, 10)
 	escape_timer.start()
+	_in_tree = true
 
 
 func _on_escape_timer_timeout() -> void:
@@ -71,6 +81,7 @@ func _on_escape_timer_timeout() -> void:
 	_direction = randi_range(-1, 1)
 	move_timer.start()
 	escaped_tree.emit()
+	_in_tree = false
 
 
 func _on_squirrel_game_lost() -> void:

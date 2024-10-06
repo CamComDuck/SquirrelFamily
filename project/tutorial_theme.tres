@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bjuxrux52vauw"]
+
+[ext_resource type="FontFile" uid="uid://dcpqnbcgf11dy" path="res://RubikBubbles-Regular.ttf" id="1_0ce4d"]
+
+[resource]
+Label/fonts/font = ExtResource("1_0ce4d")

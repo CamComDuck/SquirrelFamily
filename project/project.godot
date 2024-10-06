@@ -29,6 +29,7 @@ window/size/resizable=false
 
 folder_colors={
 "res://audio_manager/": "purple",
+"res://background/": "red",
 "res://boundary/": "red",
 "res://fish/": "green",
 "res://level/": "orange",

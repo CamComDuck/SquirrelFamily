@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dg7f0yihafqan"]
+[gd_scene load_steps=21 format=4 uid="uid://dg7f0yihafqan"]
 
 [ext_resource type="Script" path="res://title/title.gd" id="1_87ayo"]
 [ext_resource type="FontFile" uid="uid://dcpqnbcgf11dy" path="res://RubikBubbles-Regular.ttf" id="1_mee3k"]
@@ -7,6 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://bauywjo1yeumm" path="res://snake/snake.png" id="3_qdq6q"]
 [ext_resource type="Texture2D" uid="uid://nomgbcxffi5d" path="res://rabbit/rabbit.png" id="4_32hwf"]
 [ext_resource type="Texture2D" uid="uid://01vasd8i8ht4" path="res://fish/fish.png" id="5_lg3pg"]
+[ext_resource type="Theme" uid="uid://bjuxrux52vauw" path="res://tutorial_theme.tres" id="8_746hh"]
+[ext_resource type="Texture2D" uid="uid://cj1tneplcsuot" path="res://title/space.png" id="9_wjs2i"]
+[ext_resource type="Texture2D" uid="uid://148d2pucwgun" path="res://tree/tree_top.png" id="10_0k254"]
+[ext_resource type="Texture2D" uid="uid://djvd352hfunnl" path="res://snake/rock.png" id="11_atra7"]
+[ext_resource type="Texture2D" uid="uid://bf22kj5o6ll3m" path="res://fish/pond_dirty.png" id="12_swesc"]
+[ext_resource type="Texture2D" uid="uid://mk46sjg6ml8" path="res://fish/pond_clean.png" id="13_l87cs"]
+[ext_resource type="TileSet" uid="uid://c32iuuyqghd7x" path="res://tilemap.tres" id="14_fa4qd"]
+[ext_resource type="PackedScene" uid="uid://0441mpdy11dr" path="res://background/parallax_background.tscn" id="15_2ombd"]
 
 [sub_resource type="Animation" id="Animation_fb8cw"]
 resource_name = "squirrel"
@@ -131,40 +139,49 @@ Family"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="."]
+[node name="PlayButton" type="Button" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 521.92
-offset_top = 418.7
-offset_right = 715.92
-offset_bottom = 474.7
+offset_left = 519.0
+offset_top = 393.0
+offset_right = 713.0
+offset_bottom = 449.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_mee3k")
 theme_override_font_sizes/font_size = 40
 text = "Play Now"
 
+[node name="TutorialButton" type="Button" parent="."]
+offset_left = 527.0
+offset_top = 452.0
+offset_right = 706.0
+offset_bottom = 508.0
+theme_override_fonts/font = ExtResource("1_mee3k")
+theme_override_font_sizes/font_size = 40
+text = "Tutorial"
+
 [node name="Squirrel" type="Sprite2D" parent="."]
 position = Vector2(704, 562)
 texture = ExtResource("1_tq07s")
 
 [node name="Owl" type="Sprite2D" parent="."]
-position = Vector2(888.816, 362.364)
+position = Vector2(363, 519)
 texture = ExtResource("2_n7t0u")
 
 [node name="Snake" type="Sprite2D" parent="."]
-position = Vector2(360.948, 468.094)
+position = Vector2(766, 104)
 texture = ExtResource("3_qdq6q")
 
 [node name="Rabbit" type="Sprite2D" parent="."]
-position = Vector2(661.685, 556.664)
+position = Vector2(347, 122)
 texture = ExtResource("4_32hwf")
 
 [node name="Fish" type="Sprite2D" parent="."]
-position = Vector2(400.727, 119.692)
+position = Vector2(916, 333)
 texture = ExtResource("5_lg3pg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -173,4 +190,174 @@ libraries = {
 }
 autoplay = "squirrel"
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="Tutorial" type="VBoxContainer" parent="."]
+visible = false
+z_index = 20
+z_as_relative = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 382.0
+offset_top = -8.0
+offset_right = 895.0
+offset_bottom = 831.545
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.88, 0.88)
+alignment = 1
+
+[node name="Label5" type="Label" parent="Tutorial"]
+layout_mode = 2
+theme = ExtResource("8_746hh")
+theme_override_font_sizes/font_size = 30
+text = "Tutorial Overview"
+
+[node name="HSeparator2" type="HSeparator" parent="Tutorial"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tutorial"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Tutorial/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_tq07s")
+
+[node name="Label" type="Label" parent="Tutorial/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_746hh")
+text = "Move with WASD or Arrow Keys"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Tutorial"]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Tutorial/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("9_wjs2i")
+
+[node name="Label2" type="Label" parent="Tutorial/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("8_746hh")
+text = "Use for all interactions"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Tutorial"]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Tutorial/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("2_n7t0u")
+
+[node name="Label3" type="Label" parent="Tutorial/HBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("8_746hh")
+text = "Don't get eaten"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Tutorial"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="Tutorial/HBoxContainer4"]
+layout_mode = 2
+texture = ExtResource("10_0k254")
+
+[node name="Label5" type="Label" parent="Tutorial/HBoxContainer4"]
+layout_mode = 2
+theme = ExtResource("8_746hh")
+text = "Climb to hide from the owl"
+
+[node name="HSeparator" type="HSeparator" parent="Tutorial"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="Tutorial"]
+layout_mode = 2
+theme = ExtResource("8_746hh")
+theme_override_font_sizes/font_size = 25
+text = "Rescue your family to win!"
+horizontal_alignment = 1
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Tutorial"]
+layout_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="Tutorial/HBoxContainer5"]
+layout_mode = 2
+texture = ExtResource("3_qdq6q")
+
+[node name="TextureRect5" type="TextureRect" parent="Tutorial/HBoxContainer5"]
+layout_mode = 2
+texture = ExtResource("11_atra7")
+
+[node name="Label6" type="Label" parent="Tutorial/HBoxContainer5"]
+layout_mode = 2
+theme = ExtResource("8_746hh")
+text = "Return Snake to its favorite rock"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="Tutorial"]
+layout_mode = 2
+
+[node name="TextureRect5" type="TextureRect" parent="Tutorial/HBoxContainer6"]
+layout_mode = 2
+texture = ExtResource("12_swesc")
+
+[node name="TextureRect6" type="TextureRect" parent="Tutorial/HBoxContainer6"]
+layout_mode = 2
+texture = ExtResource("5_lg3pg")
+
+[node name="TextureRect7" type="TextureRect" parent="Tutorial/HBoxContainer6"]
+layout_mode = 2
+texture = ExtResource("13_l87cs")
+
+[node name="Label7" type="Label" parent="Tutorial/HBoxContainer6"]
+layout_mode = 2
+theme = ExtResource("8_746hh")
+text = "Move Fish from the
+Dirty Pond to the
+Clean Pond"
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="Tutorial"]
+layout_mode = 2
+
+[node name="TextureRect6" type="TextureRect" parent="Tutorial/HBoxContainer7"]
+layout_mode = 2
+texture = ExtResource("4_32hwf")
+
+[node name="TextureRect7" type="TextureRect" parent="Tutorial/HBoxContainer7"]
+layout_mode = 2
+texture = ExtResource("10_0k254")
+
+[node name="Label8" type="Label" parent="Tutorial/HBoxContainer7"]
+layout_mode = 2
+theme = ExtResource("8_746hh")
+text = "Keep rabbit safe in any tree"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = 19
+z_as_relative = false
+offset_left = 379.175
+offset_top = -8.0
+offset_right = 900.395
+offset_bottom = 831.545
+scale = Vector2(0.88, 0.88)
+color = Color(0.332881, 0.332881, 0.332881, 1)
+
+[node name="ExitTutorialButton" type="Button" parent="."]
+visible = false
+z_index = 21
+z_as_relative = false
+offset_left = 722.0
+offset_top = 7.0
+offset_right = 830.0
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("1_mee3k")
+theme_override_font_sizes/font_size = 15
+text = "Exit Tutorial"
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+z_index = -5
+z_as_relative = false
+tile_map_data = PackedByteArray("AAAAAAYAAwAAAAAAAAABAAYAAwAAAAAAAAACAAYAAwAAAAAAAAADAAYAAwAAAAAAAAAEAAYAAwAAAAAAAAAFAAYAAwAAAAAAAAAGAAYAAwAAAAAAAAAHAAYAAwAAAAAAAAAIAAYAAwAAAAAAAAAJAAYAAwAAAAAAAAAKAAYAAwAAAAAAAAALAAYAAwAAAAAAAAAMAAYAAwAAAAAAAAANAAYAAwAAAAAAAAD//wYAAwAAAAAAAAD//wcAAgAAAAAAAAAAAAcAAgAAAAAAAAABAAcAAgAAAAAAAAACAAcAAgAAAAAAAAADAAcAAgAAAAAAAAAEAAcAAgAAAAAAAAAFAAcAAgAAAAAAAAAGAAcAAgAAAAAAAAAHAAcAAgAAAAAAAAAIAAcAAgAAAAAAAAAJAAcAAgAAAAAAAAAKAAcAAgAAAAAAAAALAAcAAgAAAAAAAAAMAAcAAgAAAAAAAAANAAcAAgAAAAAAAAA=")
+tile_set = ExtResource("14_fa4qd")
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("15_2ombd")]
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="TutorialButton" to="." method="_on_tutorial_button_pressed"]
+[connection signal="pressed" from="ExitTutorialButton" to="." method="_on_exit_tutorial_button_pressed"]

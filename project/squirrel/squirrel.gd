@@ -34,6 +34,7 @@ func _physics_process(delta: float) -> void:
 
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
+			AudioManager.play_jump()
 
 		var direction := Input.get_axis("move_left", "move_right")
 		if direction != 0:
@@ -85,6 +86,7 @@ func _physics_process(delta: float) -> void:
 			elif Input.is_action_just_pressed("action") and not _is_hiding:
 				_is_hiding = true
 				_can_move = false
+				AudioManager.play_climbing()
 			
 		elif shape_cast_2d.get_collider(i).name == "PondDirty":
 			
@@ -147,6 +149,7 @@ func _physics_process(delta: float) -> void:
 func _on_bite_timer_timeout() -> void:
 	game_lost.emit()
 	_can_move = false
+	AudioManager.play_death_snake()
 
 
 func _on_rabbit_escaped_tree() -> void:

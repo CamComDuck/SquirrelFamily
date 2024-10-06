@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://nir4v4ikx5bj"]
+
+[ext_resource type="Script" path="res://audio_manager/audio_manager.gd" id="1_it3h1"]
+[ext_resource type="AudioStream" uid="uid://hfugefjahkgm" path="res://audio_manager/climbing.wav" id="2_tagpl"]
+[ext_resource type="AudioStream" uid="uid://csiibwjkfgdpm" path="res://audio_manager/death_owl.wav" id="3_ca7x4"]
+[ext_resource type="AudioStream" uid="uid://bcfkckxugrfty" path="res://audio_manager/death_snake.wav" id="4_y80yh"]
+[ext_resource type="AudioStream" uid="uid://bxtifnute484w" path="res://audio_manager/jump.wav" id="5_d0q15"]
+[ext_resource type="AudioStream" uid="uid://b4s4yhc5k5hhb" path="res://audio_manager/menu_select.wav" id="6_2q571"]
+[ext_resource type="AudioStream" uid="uid://bgow2ixaknvwg" path="res://audio_manager/owl_hoot.wav" id="7_tv0td"]
+
+[node name="AudioManager" type="Node2D"]
+script = ExtResource("1_it3h1")
+
+[node name="Climbing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_tagpl")
+
+[node name="DeathOwl" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ca7x4")
+
+[node name="DeathSnake" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_y80yh")
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_d0q15")
+
+[node name="MenuSelect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_2q571")
+
+[node name="OwlHoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_tv0td")

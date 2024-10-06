@@ -27,8 +27,6 @@ func _ready() -> void:
 	
 	for i in 12:
 		
-		print(snake_rock_first)
-		
 		if picked.size() < 4:
 			item = randi_range(0, 4)
 			while picked.has(item) or ((item == 1 or item == 4) and (snake_rock_first != -1 and (snake_rock_first + 6 > i))) or ((item == 2 or item == 3) and (pond_first != -1 and (pond_first + 6 > i))):
@@ -91,6 +89,7 @@ func _on_squirrel_game_lost() -> void:
 	game_end_label.position.x = camera_2d.position.x - (game_end_label.size.x / 2)
 	game_end_label.text = "You lost!"
 	game_end_label.show()
+	
 
 
 func _on_squirrel_game_won() -> void:

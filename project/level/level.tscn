@@ -74,24 +74,35 @@ z_index = 10
 z_as_relative = false
 position = Vector2(-1006, 69)
 
-[node name="GameEndLabel" type="Label" parent="."]
+[node name="GameEndBox" type="VBoxContainer" parent="."]
 visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="GameEndLabel" type="Label" parent="GameEndBox"]
 z_index = 25
 z_as_relative = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 409.0
-offset_top = 293.0
-offset_right = 868.0
-offset_bottom = 430.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_fonts/font = ExtResource("4_mnb74")
 theme_override_font_sizes/font_size = 100
 text = "You Lose!"
+
+[node name="RestartButton" type="Button" parent="GameEndBox"]
+z_index = 25
+z_as_relative = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_mnb74")
+theme_override_font_sizes/font_size = 30
+text = "Restart"
+
+[node name="MainMenuButton" type="Button" parent="GameEndBox"]
+z_index = 25
+z_as_relative = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_mnb74")
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(640, 360)
@@ -218,5 +229,7 @@ tile_set = SubResource("TileSet_4xi38")
 [connection signal="game_won" from="Squirrel" to="Rabbit" method="_on_squirrel_game_won"]
 [connection signal="rabbit_picked_up" from="Squirrel" to="Rabbit" method="_on_squirrel_rabbit_picked_up"]
 [connection signal="rabbit_placed_in_tree" from="Squirrel" to="Rabbit" method="_on_squirrel_rabbit_placed_in_tree"]
+[connection signal="pressed" from="GameEndBox/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="GameEndBox/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="timeout" from="Snake/BiteTimer" to="Squirrel" method="_on_bite_timer_timeout"]
 [connection signal="escaped_tree" from="Rabbit" to="Squirrel" method="_on_rabbit_escaped_tree"]

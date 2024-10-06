@@ -4,7 +4,8 @@ var _max_x := 2350
 var _min_x := -1075
 var _spawn
 
-@onready var game_end_label: Label = $GameEndLabel
+@onready var game_end_box: VBoxContainer = $GameEndBox
+@onready var game_end_label: Label = $GameEndBox/GameEndLabel
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var squirrel: Squirrel = $Squirrel
 @onready var fish: Sprite2D = $Fish
@@ -86,13 +87,24 @@ func _physics_process(_delta: float) -> void:
 	screen_scroll_bar.position.x = camera_2d.position.x - (screen_scroll_bar.size.x / 2)
 
 func _on_squirrel_game_lost() -> void:
-	game_end_label.position.x = camera_2d.position.x - (game_end_label.size.x / 2)
+	game_end_box.position.x = camera_2d.position.x - (game_end_box.size.x / 2)
+	game_end_box.position.y = camera_2d.position.y - (game_end_box.size.y / 2)
 	game_end_label.text = "You lost!"
-	game_end_label.show()
-	
+	game_end_box.show()
 
 
 func _on_squirrel_game_won() -> void:
-	game_end_label.position.x = camera_2d.position.x - (game_end_label.size.x / 2)
+	game_end_box.position.x = camera_2d.position.x - (game_end_box.size.x / 2)
+	game_end_box.position.y = camera_2d.position.y - (game_end_box.size.y / 2)
 	game_end_label.text = "You Win!"
-	game_end_label.show()
+	game_end_box.show()
+
+
+func _on_restart_button_pressed() -> void:
+	AudioManager.play_menu_select()
+	get_tree().reload_current_scene()
+
+
+func _on_main_menu_button_pressed() -> void:
+	AudioManager.play_menu_select()
+	get_tree().change_scene_to_file("res://title/title.tscn")

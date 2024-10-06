@@ -85,10 +85,3 @@ func _on_squirrel_game_won() -> void:
 	velocity = Vector2.ZERO
 	move_timer.stop()
 	escape_timer.stop()
-
-
-func _on_owl_game_lost() -> void:
-	_can_move = false
-	velocity = Vector2.ZERO
-	move_timer.stop()
-	escape_timer.stop()

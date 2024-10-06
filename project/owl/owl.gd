@@ -1,8 +1,6 @@
 class_name Owl
 extends RigidBody2D
 
-signal game_lost
-
 var _moving_left : bool
 var _max_x := 2350
 var _min_x := -1075
@@ -75,9 +73,7 @@ func _on_body_entered(body: Node) -> void:
 	if body.name != "WallRight" and body.name != "WallLeft":
 		_is_diving = false
 	
-	
 	if body.name == "Squirrel":
-		game_lost.emit()
 		_can_move = false
 		linear_velocity = Vector2.ZERO
 	

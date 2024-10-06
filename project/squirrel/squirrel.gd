@@ -133,9 +133,6 @@ func _physics_process(delta: float) -> void:
 	if _fish_in_clean_pond and _snake_on_rock and _rabbit_in_tree:
 		game_won.emit()
 		_can_move = false
-	
-func _on_owl_game_lost() -> void:
-	_can_move = false
 
 
 func _on_bite_timer_timeout() -> void:

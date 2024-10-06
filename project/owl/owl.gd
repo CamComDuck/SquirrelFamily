@@ -12,7 +12,7 @@ var _move_speed := 50000
 var _is_hunting := false
 var _is_diving := false
 var _dive_x : float
-var _can_move : bool = false
+var _can_move : bool = true
 
 @onready var _hunt_timer_object : Timer = $HuntTimer
 
@@ -83,3 +83,8 @@ func _on_body_entered(body: Node) -> void:
 	
 	elif body.name != "Floor" and body.name != "Ceiling":
 		_moving_left = not _moving_left
+
+
+func _on_squirrel_game_won() -> void:
+	_can_move = false
+	linear_velocity = Vector2.ZERO

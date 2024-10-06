@@ -2,6 +2,9 @@ class_name Squirrel
 extends CharacterBody2D
 
 signal game_lost
+signal game_won
+signal rabbit_picked_up
+signal rabbit_placed_in_tree
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
@@ -9,8 +12,9 @@ const JUMP_VELOCITY = -500.0
 var _can_move := true
 var _is_hiding := false
 
-var _fish_in_dirty_pond := true
+var _fish_in_clean_pond := false
 var _snake_on_rock := false
+var _rabbit_in_tree = false
 var _object_in_hand : String = "NONE"
 
 @onready var shape_cast_2d: ShapeCast2D = $ShapeCast2D
@@ -21,6 +25,7 @@ var _object_in_hand : String = "NONE"
 @onready var snake: Area2D = $"../Snake"
 @onready var bite_progress_bar: ProgressBar = $"../Snake/BiteProgressBar"
 @onready var bite_timer: Timer = $"../Snake/BiteTimer"
+@onready var rabbit: Rabbit = $"../Rabbit"
 
 func _physics_process(delta: float) -> void:
 	if _can_move:
@@ -56,9 +61,13 @@ func _physics_process(delta: float) -> void:
 	elif _object_in_hand == "SNAKE":
 		snake.position = position
 		bite_progress_bar.value = (bite_timer.time_left / bite_timer.wait_time) * 100
+	elif _object_in_hand == "RABBIT":
+		rabbit.position = Vector2(position.x, position.y - 125)
+	
 			
 	# HANDLE COLLISIONS
 	for i in shape_cast_2d.get_collision_count():
+		
 			
 		if shape_cast_2d.get_collider(i).name == "Owl":
 			
@@ -67,28 +76,31 @@ func _physics_process(delta: float) -> void:
 			
 		elif shape_cast_2d.get_collider(i).has_method("is_tree"):
 			
-			if Input.is_action_just_pressed("action") and not _is_hiding:
+			if Input.is_action_just_pressed("action") and _object_in_hand == "RABBIT":
+				_object_in_hand = "NONE"
+				rabbit_placed_in_tree.emit()
+				_rabbit_in_tree = true
+				
+			elif Input.is_action_just_pressed("action") and not _is_hiding:
 				_is_hiding = true
 				_can_move = false
 			
 		elif shape_cast_2d.get_collider(i).name == "PondDirty":
 			
-			if Input.is_action_just_pressed("action") and _fish_in_dirty_pond and _object_in_hand == "NONE":
-				_fish_in_dirty_pond = false
+			if Input.is_action_just_pressed("action") and not _fish_in_clean_pond and _object_in_hand == "NONE":
 				_object_in_hand = "FISH"
-			elif Input.is_action_just_pressed("action") and not _fish_in_dirty_pond and _object_in_hand == "FISH":
-				_fish_in_dirty_pond = true
+			elif Input.is_action_just_pressed("action") and not _fish_in_clean_pond and _object_in_hand == "FISH":
 				_object_in_hand = "NONE"
 				fish.position = pond_dirty.position
 				
 		elif shape_cast_2d.get_collider(i).name == "PondClean":
 			
-			if Input.is_action_just_pressed("action") and not _fish_in_dirty_pond and _object_in_hand == "FISH":
-				_fish_in_dirty_pond = false
+			if Input.is_action_just_pressed("action") and not _fish_in_clean_pond and _object_in_hand == "FISH":
+				_fish_in_clean_pond = true
 				_object_in_hand = "NONE"
 				fish.position = pond_clean.position
-			elif Input.is_action_just_pressed("action") and not _fish_in_dirty_pond and _object_in_hand == "NONE":
-				_fish_in_dirty_pond = false
+			elif Input.is_action_just_pressed("action") and _fish_in_clean_pond and _object_in_hand == "NONE":
+				_fish_in_clean_pond = false
 				_object_in_hand = "FISH"
 				
 		elif shape_cast_2d.get_collider(i).name == "Rock":
@@ -107,11 +119,21 @@ func _physics_process(delta: float) -> void:
 				_object_in_hand = "SNAKE"
 				_snake_on_rock = false
 				
-				bite_timer.wait_time = randf_range(10, 15)
+				bite_timer.wait_time = randf_range(8, 10)
 				bite_timer.start()
 				bite_progress_bar.show()
+				
+		elif shape_cast_2d.get_collider(i).name == "Rabbit":
+			
+			if Input.is_action_just_pressed("action") and _object_in_hand == "NONE":
+				_object_in_hand = "RABBIT"
+				rabbit_picked_up.emit()
 
-
+	
+	if _fish_in_clean_pond and _snake_on_rock and _rabbit_in_tree:
+		game_won.emit()
+		_can_move = false
+	
 func _on_owl_game_lost() -> void:
 	_can_move = false
 
@@ -119,3 +141,7 @@ func _on_owl_game_lost() -> void:
 func _on_bite_timer_timeout() -> void:
 	game_lost.emit()
 	_can_move = false
+
+
+func _on_rabbit_escaped_tree() -> void:
+	_rabbit_in_tree = false

@@ -31,4 +31,8 @@ shape = SubResource("RectangleShape2D_dy1mr")
 target_position = Vector2(0, 0)
 collision_mask = 3
 
+[node name="EscapeTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="EscapeTimer" to="." method="_on_escape_timer_timeout"]

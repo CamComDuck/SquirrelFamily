@@ -52,7 +52,7 @@ z_index = 10
 z_as_relative = false
 position = Vector2(-1075, 60)
 
-[node name="GameLostLabel" type="Label" parent="."]
+[node name="GameEndLabel" type="Label" parent="."]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -172,10 +172,18 @@ texture = ExtResource("10_15j5t")
 shape = SubResource("CircleShape2D_4d756")
 
 [node name="Rabbit" parent="." instance=ExtResource("11_vl36j")]
-position = Vector2(-112, 644)
+position = Vector2(751, 603)
 
 [connection signal="game_lost" from="Squirrel" to="." method="_on_squirrel_game_lost"]
 [connection signal="game_lost" from="Squirrel" to="Owl" method="_on_squirrel_game_lost"]
+[connection signal="game_lost" from="Squirrel" to="Rabbit" method="_on_squirrel_game_lost"]
+[connection signal="game_won" from="Squirrel" to="." method="_on_squirrel_game_won"]
+[connection signal="game_won" from="Squirrel" to="Owl" method="_on_squirrel_game_won"]
+[connection signal="game_won" from="Squirrel" to="Rabbit" method="_on_squirrel_game_won"]
+[connection signal="rabbit_picked_up" from="Squirrel" to="Rabbit" method="_on_squirrel_rabbit_picked_up"]
+[connection signal="rabbit_placed_in_tree" from="Squirrel" to="Rabbit" method="_on_squirrel_rabbit_placed_in_tree"]
 [connection signal="game_lost" from="Owl" to="." method="_on_owl_game_lost"]
 [connection signal="game_lost" from="Owl" to="Squirrel" method="_on_owl_game_lost"]
+[connection signal="game_lost" from="Owl" to="Rabbit" method="_on_owl_game_lost"]
 [connection signal="timeout" from="Snake/BiteTimer" to="Squirrel" method="_on_bite_timer_timeout"]
+[connection signal="escaped_tree" from="Rabbit" to="Squirrel" method="_on_rabbit_escaped_tree"]

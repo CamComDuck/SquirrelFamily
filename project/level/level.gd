@@ -3,7 +3,7 @@ extends Node2D
 var _max_x := 2350
 var _min_x := -1075
 
-@onready var game_lost_label: Label = $GameLostLabel
+@onready var game_end_label: Label = $GameEndLabel
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var squirrel: Squirrel = $Squirrel
 @onready var fish: Sprite2D = $Fish
@@ -67,9 +67,18 @@ func _physics_process(_delta: float) -> void:
 	screen_scroll_bar.position.x = camera_2d.position.x - (screen_scroll_bar.size.x / 2)
 
 func _on_owl_game_lost() -> void:
-	game_lost_label.show()
+	game_end_label.position.x = squirrel.position.x - (game_end_label.size.x / 2)
+	game_end_label.text = "You lost!"
+	game_end_label.show()
 
 
 func _on_squirrel_game_lost() -> void:
-	game_lost_label.position.x = squirrel.position.x - (game_lost_label.size.x / 2)
-	game_lost_label.show()
+	game_end_label.position.x = squirrel.position.x - (game_end_label.size.x / 2)
+	game_end_label.text = "You lost!"
+	game_end_label.show()
+
+
+func _on_squirrel_game_won() -> void:
+	game_end_label.position.x = squirrel.position.x - (game_end_label.size.x / 2)
+	game_end_label.text = "You Win!"
+	game_end_label.show()

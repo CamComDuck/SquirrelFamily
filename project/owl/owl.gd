@@ -11,6 +11,7 @@ var _is_hunting := false
 var _is_diving := false
 var _dive_x : float
 var _can_move : bool = true
+var _facing_left : bool
 
 @onready var _hunt_timer_object : Timer = $HuntTimer
 
@@ -20,15 +21,27 @@ func _ready() -> void:
 	var starting_dir : int = randi_range(0, 1)
 	if starting_dir == 0:
 		_moving_left = true
+		_facing_left = true
+		$Sprite2D.flip_h = true
 	else:
 		_moving_left = false
+		_facing_left = false
+		$Sprite2D.flip_h = false
 		
 
 func _physics_process(delta: float) -> void:
 	if _can_move:
+		
+		if linear_velocity.x < 0 and not _facing_left:
+			_facing_left = true
+			$Sprite2D.flip_h = true
+		elif linear_velocity.x > 0 and _facing_left:
+			_facing_left = false
+			$Sprite2D.flip_h = false
+		
 		if not _is_hunting and not _is_diving:
 			_movement(delta, 0)
-			var hunt_chance : float = randf_range(0, 1500)
+			var hunt_chance : float = randf_range(0, 1250)
 			if hunt_chance < 2: # Starts hunt
 				_is_hunting = true
 				_is_diving = true
@@ -51,12 +64,16 @@ func _physics_process(delta: float) -> void:
 func _movement(delta : float, y_dir : int) -> void:
 	if position.x < _max_x and not _moving_left:
 		linear_velocity = Vector2(_move_speed * delta, y_dir)
+		
 	elif position.x >= _max_x and not _moving_left:
 		_moving_left = true
+		
 	elif position.x >= _min_x and _moving_left:
 		linear_velocity = Vector2(-1 * _move_speed * delta, y_dir)
+		
 	elif position.x <= _min_x and _moving_left:
 		_moving_left = false
+		
 
 
 func _on_hunt_timer_timeout() -> void:

@@ -26,7 +26,7 @@ func _ready() -> void:
 	var snake_rock_first := -1
 	var pond_first := -1
 	
-	for i in 12:
+	for i in 11:
 		
 		if picked.size() < 4:
 			item = randi_range(0, 4)

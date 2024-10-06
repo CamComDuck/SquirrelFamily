@@ -17,6 +17,8 @@ var _snake_on_rock := false
 var _rabbit_in_tree = false
 var _object_in_hand : String = "NONE"
 
+var _facing_left : bool
+
 @onready var shape_cast_2d: ShapeCast2D = $ShapeCast2D
 @onready var fish: Sprite2D = $"../Fish"
 @onready var pond_clean: StaticBody2D = $"../PondClean"
@@ -37,6 +39,14 @@ func _physics_process(delta: float) -> void:
 			AudioManager.play_jump()
 
 		var direction := Input.get_axis("move_left", "move_right")
+		
+		if direction > 0 and _facing_left:
+			_facing_left = false
+			scale.x = scale.x * -1
+		elif direction < 0 and not _facing_left:
+			_facing_left = true
+			scale.x = scale.x * -1
+		
 		if direction != 0:
 			velocity.x = direction * SPEED
 		else:

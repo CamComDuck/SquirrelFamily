@@ -10,6 +10,7 @@ var _can_move := true
 var _is_moving := true
 var _direction : int
 var _in_tree := false
+var _facing_left : bool
 
 @onready var move_timer: Timer = $MoveTimer
 @onready var shape_cast_2d: ShapeCast2D = $ShapeCast2D
@@ -33,6 +34,15 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY
 
 		if _is_moving:
+			
+			if _direction > 0 and _facing_left:
+				_facing_left = false
+				scale.x = scale.x * -1
+			elif _direction < 0 and not _facing_left:
+				_facing_left = true
+				scale.x = scale.x * -1
+				
+				
 			if _direction != 0:
 				velocity.x = _direction * SPEED
 			else:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://dg7f0yihafqan"]
+[gd_scene load_steps=22 format=4 uid="uid://dg7f0yihafqan"]
 
 [ext_resource type="Script" path="res://title/title.gd" id="1_87ayo"]
 [ext_resource type="FontFile" uid="uid://dcpqnbcgf11dy" path="res://RubikBubbles-Regular.ttf" id="1_mee3k"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://mk46sjg6ml8" path="res://fish/pond_clean.png" id="13_l87cs"]
 [ext_resource type="TileSet" uid="uid://c32iuuyqghd7x" path="res://tilemap.tres" id="14_fa4qd"]
 [ext_resource type="PackedScene" uid="uid://0441mpdy11dr" path="res://background/parallax_background.tscn" id="15_2ombd"]
+[ext_resource type="PackedScene" uid="uid://bwe4xhstgimq2" path="res://tree/tree.tscn" id="16_mupim"]
 
 [sub_resource type="Animation" id="Animation_fb8cw"]
 resource_name = "squirrel"
@@ -132,6 +133,8 @@ offset_left = 178.0
 offset_top = 42.0
 offset_right = 1055.0
 offset_bottom = 519.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("1_mee3k")
 theme_override_font_sizes/font_size = 100
 text = "Squirrel
@@ -353,10 +356,23 @@ text = "Exit Tutorial"
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -5
 z_as_relative = false
+position = Vector2(0, 15.485)
 tile_map_data = PackedByteArray("AAAAAAYAAwAAAAAAAAABAAYAAwAAAAAAAAACAAYAAwAAAAAAAAADAAYAAwAAAAAAAAAEAAYAAwAAAAAAAAAFAAYAAwAAAAAAAAAGAAYAAwAAAAAAAAAHAAYAAwAAAAAAAAAIAAYAAwAAAAAAAAAJAAYAAwAAAAAAAAAKAAYAAwAAAAAAAAALAAYAAwAAAAAAAAAMAAYAAwAAAAAAAAANAAYAAwAAAAAAAAD//wYAAwAAAAAAAAD//wcAAgAAAAAAAAAAAAcAAgAAAAAAAAABAAcAAgAAAAAAAAACAAcAAgAAAAAAAAADAAcAAgAAAAAAAAAEAAcAAgAAAAAAAAAFAAcAAgAAAAAAAAAGAAcAAgAAAAAAAAAHAAcAAgAAAAAAAAAIAAcAAgAAAAAAAAAJAAcAAgAAAAAAAAAKAAcAAgAAAAAAAAALAAcAAgAAAAAAAAAMAAcAAgAAAAAAAAANAAcAAgAAAAAAAAA=")
 tile_set = ExtResource("14_fa4qd")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("15_2ombd")]
+
+[node name="Tree" parent="." instance=ExtResource("16_mupim")]
+position = Vector2(98, 517)
+
+[node name="Tree2" parent="." instance=ExtResource("16_mupim")]
+position = Vector2(205, 519)
+
+[node name="Tree3" parent="." instance=ExtResource("16_mupim")]
+position = Vector2(1215, 515)
+
+[node name="Tree4" parent="." instance=ExtResource("16_mupim")]
+position = Vector2(1080, 517)
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="TutorialButton" to="." method="_on_tutorial_button_pressed"]

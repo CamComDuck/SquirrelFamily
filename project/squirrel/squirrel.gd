@@ -68,12 +68,21 @@ func _physics_process(delta: float) -> void:
 		
 	
 	if _object_in_hand == "FISH":
-		fish.position = Vector2(position.x + 50, position.y)
+		if not _facing_left:
+			fish.position = Vector2(position.x + 50, position.y)
+		else:
+			fish.position = Vector2(position.x - 50, position.y)
 	elif _object_in_hand == "SNAKE":
-		snake.position = Vector2(position.x + 50, position.y)
+		if not _facing_left:
+			snake.position = Vector2(position.x + 50, position.y)
+		else:
+			snake.position = Vector2(position.x - 50, position.y)
 		bite_progress_bar.value = (bite_timer.time_left / bite_timer.wait_time) * 100
 	elif _object_in_hand == "RABBIT":
-		rabbit.position = Vector2(position.x + 65, position.y)
+		if not _facing_left:
+			rabbit.position = Vector2(position.x + 65, position.y)
+		else:
+			rabbit.position = Vector2(position.x - 65, position.y)
 	
 			
 	# HANDLE COLLISIONS

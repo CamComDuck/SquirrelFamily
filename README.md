@@ -6,3 +6,4 @@
 ## Third-Party Assets
 
  - All graphics and sound are original
+ - Font "RubikBubbles-Regular" from [Google Fonts](https://fonts.google.com/specimen/Rubik+Bubbles/about?preview.text=Squirrel%20Family%20123&query=cute&lang=en_Latn) licensed under [Open Font Licents](https://openfontlicense.org/open-font-license-official-text/)

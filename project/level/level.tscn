@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=4 uid="uid://ccdxv26vn66gg"]
+[gd_scene load_steps=25 format=4 uid="uid://ccdxv26vn66gg"]
 
 [ext_resource type="PackedScene" uid="uid://dqk2671mri1gh" path="res://squirrel/squirrel.tscn" id="1_0w128"]
 [ext_resource type="Script" path="res://level/level.gd" id="1_tx1wx"]
 [ext_resource type="PackedScene" uid="uid://cma23htujjnyp" path="res://owl/owl.tscn" id="3_hqqth"]
+[ext_resource type="FontFile" uid="uid://dcpqnbcgf11dy" path="res://RubikBubbles-Regular.ttf" id="4_mnb74"]
 [ext_resource type="Texture2D" uid="uid://p1b6pfvqyepi" path="res://squirrel/squirrel.png" id="4_u1q8o"]
 [ext_resource type="PackedScene" uid="uid://clf6quit13oq7" path="res://boundary/boundary.tscn" id="5_ljrit"]
 [ext_resource type="Texture2D" uid="uid://mk46sjg6ml8" path="res://fish/pond_clean.png" id="6_mabaf"]
@@ -88,6 +89,7 @@ offset_right = 868.0
 offset_bottom = 430.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_mnb74")
 theme_override_font_sizes/font_size = 100
 text = "You Lose!"
 

@@ -1,3 +1,176 @@
-[gd_scene format=3 uid="uid://dg7f0yihafqan"]
+[gd_scene load_steps=13 format=3 uid="uid://dg7f0yihafqan"]
+
+[ext_resource type="Script" path="res://title/title.gd" id="1_87ayo"]
+[ext_resource type="FontFile" uid="uid://dcpqnbcgf11dy" path="res://RubikBubbles-Regular.ttf" id="1_mee3k"]
+[ext_resource type="Texture2D" uid="uid://p1b6pfvqyepi" path="res://squirrel/squirrel.png" id="1_tq07s"]
+[ext_resource type="Texture2D" uid="uid://cfu3ii6ujo500" path="res://owl/owl.png" id="2_n7t0u"]
+[ext_resource type="Texture2D" uid="uid://bauywjo1yeumm" path="res://snake/snake.png" id="3_qdq6q"]
+[ext_resource type="Texture2D" uid="uid://nomgbcxffi5d" path="res://rabbit/rabbit.png" id="4_32hwf"]
+[ext_resource type="Texture2D" uid="uid://01vasd8i8ht4" path="res://fish/fish.png" id="5_lg3pg"]
+
+[sub_resource type="Animation" id="Animation_fb8cw"]
+resource_name = "squirrel"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Squirrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 2.96667, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(704, 562), Vector2(916, 333), Vector2(766, 104), Vector2(347, 122), Vector2(363, 519), Vector2(704, 562)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Owl:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 3.96667, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(363, 519), Vector2(704, 562), Vector2(916, 333), Vector2(766, 104), Vector2(347, 122), Vector2(363, 519)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Snake:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(766, 104), Vector2(347, 122), Vector2(363, 519), Vector2(704, 562), Vector2(916, 333), Vector2(766, 104)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Rabbit:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.966667, 2, 3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(347, 122), Vector2(363, 519), Vector2(704, 562), Vector2(916, 333), Vector2(766, 104), Vector2(347, 122)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Fish:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 2, 2.96667, 4.1, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(916, 333), Vector2(766, 104), Vector2(347, 122), Vector2(363, 519), Vector2(704, 562), Vector2(916, 333)]
+}
+
+[sub_resource type="Animation" id="Animation_05ftu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Squirrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(704, 562)]
+}
+
+[sub_resource type="Animation" id="Animation_5f07n"]
+resource_name = "Owl"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Squirrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 2.96667, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(704, 562), Vector2(916, 333), Vector2(766, 104), Vector2(347, 122), Vector2(363, 519), Vector2(704, 562)]
+}
+
+[sub_resource type="Animation" id="Animation_ny57v"]
+resource_name = "owl"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rs4ja"]
+_data = {
+"Owl": SubResource("Animation_5f07n"),
+"RESET": SubResource("Animation_05ftu"),
+"owl": SubResource("Animation_ny57v"),
+"squirrel": SubResource("Animation_fb8cw")
+}
 
 [node name="Title" type="Node2D"]
+script = ExtResource("1_87ayo")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 178.0
+offset_top = 42.0
+offset_right = 1055.0
+offset_bottom = 519.0
+theme_override_fonts/font = ExtResource("1_mee3k")
+theme_override_font_sizes/font_size = 100
+text = "Squirrel
+Family"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 521.92
+offset_top = 418.7
+offset_right = 715.92
+offset_bottom = 474.7
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_mee3k")
+theme_override_font_sizes/font_size = 40
+text = "Play Now"
+
+[node name="Squirrel" type="Sprite2D" parent="."]
+position = Vector2(704, 562)
+texture = ExtResource("1_tq07s")
+
+[node name="Owl" type="Sprite2D" parent="."]
+position = Vector2(888.816, 362.364)
+texture = ExtResource("2_n7t0u")
+
+[node name="Snake" type="Sprite2D" parent="."]
+position = Vector2(360.948, 468.094)
+texture = ExtResource("3_qdq6q")
+
+[node name="Rabbit" type="Sprite2D" parent="."]
+position = Vector2(661.685, 556.664)
+texture = ExtResource("4_32hwf")
+
+[node name="Fish" type="Sprite2D" parent="."]
+position = Vector2(400.727, 119.692)
+texture = ExtResource("5_lg3pg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rs4ja")
+}
+autoplay = "squirrel"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

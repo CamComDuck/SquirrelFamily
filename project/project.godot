@@ -13,7 +13,7 @@ config_version=5
 config/name="ludum_dare"
 run/main_scene="res://title/title.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://squirrel/squirrel.png"
 
 [autoload]
 
@@ -24,6 +24,8 @@ AudioManager="*res://audio_manager/audio_manager.tscn"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/resizable=false
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [file_customization]
 

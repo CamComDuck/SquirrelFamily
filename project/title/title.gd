@@ -5,6 +5,9 @@ extends Node2D
 @onready var color_rect: ColorRect = $ColorRect
 @onready var exit_tutorial_button: Button = $ExitTutorialButton
 
+func _ready() -> void:
+	get_window().size = Vector2i(948, 533)
+
 
 func _on_play_button_pressed() -> void:
 	AudioManager.play_menu_select()

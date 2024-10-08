@@ -75,7 +75,6 @@ func _movement(delta : float, y_dir : int) -> void:
 		_moving_left = false
 		
 
-
 func _on_hunt_timer_timeout() -> void:
 	_is_hunting = false
 	_is_diving = true

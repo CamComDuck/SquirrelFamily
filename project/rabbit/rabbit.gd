@@ -64,6 +64,7 @@ func _physics_process(delta: float) -> void:
 		if (collision == "Rock" or collision == "PondClean" or collision == "PondDirty") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
 
+
 func _on_move_timer_timeout() -> void:
 	move_timer.wait_time = randf_range(1, 3)
 	_direction = randi_range(-1, 1)

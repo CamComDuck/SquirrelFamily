@@ -14,6 +14,3 @@ func play_jump() -> void:
 	
 func play_menu_select() -> void:
 	$MenuSelect.play()
-	
-func play_owl_hoot() -> void:
-	$OwlHoot.play()

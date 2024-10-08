@@ -25,10 +25,15 @@ func _ready() -> void:
 	
 	var snake_rock_first := -1
 	var pond_first := -1
+	var total_spawns := 15
 	
-	for i in 11:
+	for i in total_spawns:
 		
-		if picked.size() < 4:
+		if picked.size() < 4 and i > total_spawns - 4:
+			item = randi_range(1, 4)
+			while picked.has(item):
+				item = randi_range(1, 4)
+		elif picked.size() < 4:
 			item = randi_range(0, 4)
 			while picked.has(item) or ((item == 1 or item == 4) and (snake_rock_first != -1 and (snake_rock_first + 6 > i))) or ((item == 2 or item == 3) and (pond_first != -1 and (pond_first + 6 > i))):
 				item = randi_range(0, 4)
@@ -81,7 +86,7 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	camera_2d.position.x = clampf(squirrel.position.x, -465, 1750)
+	camera_2d.position.x = clampf(squirrel.position.x, -455, 1750)
 	
 	screen_scroll_bar.value = camera_2d.position.x
 	screen_scroll_bar.position.x = camera_2d.position.x - (screen_scroll_bar.size.x / 2)

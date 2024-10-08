@@ -17,6 +17,41 @@
 [ext_resource type="PackedScene" uid="uid://0441mpdy11dr" path="res://background/parallax_background.tscn" id="15_2ombd"]
 [ext_resource type="PackedScene" uid="uid://bwe4xhstgimq2" path="res://tree/tree.tscn" id="16_mupim"]
 
+[sub_resource type="Animation" id="Animation_5f07n"]
+resource_name = "Owl"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Squirrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 2.96667, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(704, 562), Vector2(916, 333), Vector2(766, 104), Vector2(347, 122), Vector2(363, 519), Vector2(704, 562)]
+}
+
+[sub_resource type="Animation" id="Animation_05ftu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Squirrel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(704, 562)]
+}
+
+[sub_resource type="Animation" id="Animation_ny57v"]
+resource_name = "owl"
+
 [sub_resource type="Animation" id="Animation_fb8cw"]
 resource_name = "squirrel"
 length = 5.0
@@ -81,41 +116,6 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(916, 333), Vector2(766, 104), Vector2(347, 122), Vector2(363, 519), Vector2(704, 562), Vector2(916, 333)]
 }
-
-[sub_resource type="Animation" id="Animation_05ftu"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Squirrel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(704, 562)]
-}
-
-[sub_resource type="Animation" id="Animation_5f07n"]
-resource_name = "Owl"
-length = 5.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Squirrel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2, 2.96667, 4, 5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(704, 562), Vector2(916, 333), Vector2(766, 104), Vector2(347, 122), Vector2(363, 519), Vector2(704, 562)]
-}
-
-[sub_resource type="Animation" id="Animation_ny57v"]
-resource_name = "owl"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rs4ja"]
 _data = {

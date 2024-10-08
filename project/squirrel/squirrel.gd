@@ -87,7 +87,6 @@ func _physics_process(delta: float) -> void:
 			
 	# HANDLE COLLISIONS
 	for i in shape_cast_2d.get_collision_count():
-		
 			
 		if shape_cast_2d.get_collider(i).name == "Owl":
 			
@@ -112,6 +111,7 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed("action") and not _fish_in_clean_pond and _object_in_hand == "NONE":
 				_object_in_hand = "FISH"
 				fish.scale = Vector2(0.25, 0.25)
+				
 			elif Input.is_action_just_pressed("action") and not _fish_in_clean_pond and _object_in_hand == "FISH":
 				_object_in_hand = "NONE"
 				fish.position = Vector2(pond_dirty.position.x, pond_dirty.position.y - 20.615)
@@ -124,6 +124,7 @@ func _physics_process(delta: float) -> void:
 				_object_in_hand = "NONE"
 				fish.position = Vector2(pond_clean.position.x, pond_clean.position.y - 20.615)
 				fish.scale = Vector2(0.5, 0.5)
+				
 			elif Input.is_action_just_pressed("action") and _fish_in_clean_pond and _object_in_hand == "NONE":
 				_fish_in_clean_pond = false
 				_object_in_hand = "FISH"

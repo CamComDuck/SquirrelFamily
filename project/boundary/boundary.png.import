@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dm1gq15mellvd"
-path="res://.godot/imported/floor.png-3e7194d6bb98fc295872e05a99eea515.ctex"
+path="res://.godot/imported/boundary.png-cc6c6aa08de6245b1fa2f624446e100b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level/floor.png"
-dest_files=["res://.godot/imported/floor.png-3e7194d6bb98fc295872e05a99eea515.ctex"]
+source_file="res://boundary/boundary.png"
+dest_files=["res://.godot/imported/boundary.png-cc6c6aa08de6245b1fa2f624446e100b.ctex"]
 
 [params]
 

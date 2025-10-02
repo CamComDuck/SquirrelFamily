@@ -1,6 +1,6 @@
 # Squirrel Family
 
- - Camden's game submission for Ludum Dare 56
+ - Camden's game submission for Ludum Dare 56 under the theme "Tiny Animals"
  - See submission here: [https://ldjam.com/users/camcomduck/](https://ldjam.com/users/camcomduck/)
  - Play game on Itch.io here: [https://cam-com.itch.io/squirrel-family](https://cam-com.itch.io/squirrel-family)
 
